@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class FlameCameraToolsExampleGame extends FlameGame
     with HasKeyboardHandlerComponents {
-  final player = Player(position: Vector2.all(0), size: Vector2.all(50));
+  final player = Player(position: Vector2(450, 1500), size: Vector2.all(50));
   final double followAreaSize = 1000; // 카메라가 유지할 영역 크기
 
   @override
@@ -43,7 +44,7 @@ class FlameCameraToolsExampleGame extends FlameGame
 
     // 사각형만 보여야 하는 라인
     final rectAngleComponent = RectangleComponent(
-      position: Vector2.all(200),
+      position: Vector2(200, 500),
       size: Vector2.all(250),
     );
 
@@ -51,7 +52,7 @@ class FlameCameraToolsExampleGame extends FlameGame
 
     final circleComponent1 = CircleComponent(
       radius: 100, // 반지름 설정
-      position: Vector2.all(500), // 위치 설정
+      position: Vector2(500, 1000), // 위치 설정
       paint:
           Paint()
             ..color = Colors.green
@@ -63,7 +64,7 @@ class FlameCameraToolsExampleGame extends FlameGame
     // 원형만 보여야 하는 라인
     final circleComponent2 = CircleComponent(
       radius: 100, // 반지름 설정
-      position: Vector2(0, 500), // 위치 설정
+      position: Vector2(0, 1000), // 위치 설정
       paint:
           Paint()
             ..color = Colors.green
@@ -72,7 +73,13 @@ class FlameCameraToolsExampleGame extends FlameGame
 
     world.add(circleComponent2);
 
-    camera.smoothFollow(player, stiffness: 1);
+    // 카메라 설정 로직
+    // 카메라 크기를 400 x 300 으로 제한
+    camera.viewport = FixedResolutionViewport(resolution: Vector2(400, 300));
+
+    // camera.smoothFollow(player, stiffness: 1);
+
+    camera.follow(player);
 
     return super.onLoad();
   }
