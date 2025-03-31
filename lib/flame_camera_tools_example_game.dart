@@ -72,6 +72,9 @@ class FlameCameraToolsExampleGame extends FlameGame
     world.add(circleComponent2);
 
     // 카메라 설정 로직
+    camera = CameraComponent();
+    // camera.viewport.position = player.position;
+
     camera.viewport = FixedResolutionViewport(resolution: Vector2(900, 400));
     camera.follow(player);
 
@@ -85,4 +88,35 @@ class FlameCameraToolsExampleGame extends FlameGame
 
     super.render(canvas);
   }
+
+  // @override
+  // void update(double dt) {
+  //   super.update(dt);
+
+  //   final viewportWidth = camera.viewport.size.x;
+  //   final viewportHeight = camera.viewport.size.y;
+  //   final playerPosition = player.position;
+
+  //   // 플레이어가 viewport 영역의 절반 이상을 벗어났을 때
+  //   if (playerPosition.x < viewportWidth / 2 ||
+  //       playerPosition.x > (size.x - viewportWidth / 2)) {
+  //     // 카메라를 플레이어의 위치로 이동
+  //     camera.moveTo(
+  //       Vector2(
+  //         playerPosition.x - viewportWidth / 2,
+  //         camera.viewport.position.y,
+  //       ),
+  //     );
+  //   }
+
+  //   if (playerPosition.y < viewportHeight / 2 ||
+  //       playerPosition.y > (size.y - viewportHeight / 2)) {
+  //     camera.moveTo(
+  //       Vector2(
+  //         camera.viewport.position.x,
+  //         playerPosition.y - viewportHeight / 2,
+  //       ),
+  //     );
+  //   }
+  // }
 }
