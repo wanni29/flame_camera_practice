@@ -4,14 +4,12 @@ import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flame_camera_tools/flame_camera_tools.dart';
 import 'package:flame_camera_practice/player.dart';
 import 'package:flutter/material.dart';
 
 class FlameCameraToolsExampleGame extends FlameGame
     with HasKeyboardHandlerComponents {
   final player = Player(position: Vector2(450, 1500), size: Vector2.all(50));
-  final double followAreaSize = 1000; // 카메라가 유지할 영역 크기
 
   @override
   FutureOr<void> onLoad() {
@@ -74,13 +72,17 @@ class FlameCameraToolsExampleGame extends FlameGame
     world.add(circleComponent2);
 
     // 카메라 설정 로직
-    // 카메라 크기를 400 x 300 으로 제한
-    camera.viewport = FixedResolutionViewport(resolution: Vector2(400, 300));
-
-    // camera.smoothFollow(player, stiffness: 1);
-
+    camera.viewport = FixedResolutionViewport(resolution: Vector2(900, 400));
     camera.follow(player);
 
     return super.onLoad();
+  }
+
+  @override
+  void render(Canvas canvas) {
+    final paint = Paint()..color = Colors.black; // 원하는 배경색
+    canvas.drawRect(Rect.largest, paint);
+
+    super.render(canvas);
   }
 }
