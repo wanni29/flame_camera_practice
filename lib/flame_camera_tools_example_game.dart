@@ -77,12 +77,18 @@ class FlameCameraToolsExampleGame extends FlameGame
       player,
       stiffness: 100,
       deadZone: const Rect.fromLTRB(
-        50,
-        10,
-        50,
-        100,
+        200,
+        50, // 이 부분의 값을 조절하여 카메라를 조절하면 됨 !
+        200,
+        200,
       ), // (left, top, right, bottom)
     );
+
+    // 카메라 설정 로직
+    // camera.smoothFollow(
+    //   player,
+    //   stiffness: 1,
+    // );
 
     return super.onLoad();
   }
